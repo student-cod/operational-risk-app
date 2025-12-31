@@ -1,70 +1,57 @@
-#Operational Risk App – Task Delay Prediction
-The Operational Risk App is a machine learning-based web application designed to predict the risk of task delays in project workflows. By combining predictive analytics with a robust rule-based logic layer, the tool identifies high-risk tasks early, allowing for proactive resource allocation and improved project planning.
+# Operational Risk App – Task Delay Prediction
 
-Objectives
-Predict Accuracy: Forecast operational task delay risks with high precision.
+## Project Overview
+The **Operational Risk App** is a machine learning–based web application designed to predict the risk of task delays in project workflows. It analyzes operational factors such as task priority, estimated duration, complexity, team workload, and past delay history to classify tasks as **High Risk** or **Low Risk**.
 
-Early Identification: Spot high-risk tasks before they impact the critical path.
+## Objective
+* **Predict Accuracy**: Forecast operational task delay risks accurately.
+* **Early Detection**: Identify high-risk tasks early in the workflow.
+* **Proactive Decisions**: Assist teams in proactive decision-making.
+* **Resource Optimization**: Improve project planning and resource allocation.
 
-Proactive Decisions: Assist teams in data-driven decision-making.
+## Tools & Technologies Used
 
-Resource Optimization: Improve overall project planning and workload distribution.
+### Languages & Frameworks
+* **Python**: Primary programming language.
+* **Streamlit**: Web application framework for the interactive UI.
 
-Key Features
-Hybrid Decision System: Integrates Scikit-learn models with rule-based logic for transparency.
+### Machine Learning & Data Processing
+* **Scikit-learn**: Logistic Regression model for risk classification.
+* **Pandas & NumPy**: Data manipulation and numerical processing.
+* **Joblib**: Model persistence and serialization.
 
-Real-time Prediction: Instant risk classification via an interactive UI.
+### Deployment & DevOps
+* **Docker**: Containerization for environment consistency.
+* **Cloud-ready**: Optimized for deployment on Render, Railway, or AWS.
 
-Confidence Scoring: Provides a probability-based score for every ML prediction.
+---
 
-Bulk Processing: Supports CSV uploads for batch analysis of project tasks.
+## Workflow Summary
 
-Containerized: Fully Dockerized for easy deployment and portability.
+### 1. Data Preparation
+* Task-level operational data is prepared with relevant features.
+* Categorical features (e.g., Priority, Complexity) are encoded for ML compatibility.
 
-Tech Stack
-Language: Python
+### 2. Rule-Based Logic
+High-risk override is applied when:
+> **Past Delays Exist** AND **Team Workload is High**.
 
-UI/Frontend: Streamlit
+This hybrid approach improves transparency and decision confidence by catching known bottleneck patterns before they reach the model.
 
-Machine Learning: Scikit-learn (Logistic Regression)
+### 3. Machine Learning Prediction
+* **Model Type**: Logistic Regression predicts the probability of a delay.
+* **Confidence Score**: A percentage score calculated using prediction probabilities to show how certain the model is.
 
-Data Processing: Pandas, NumPy
+---
 
-Model Persistence: Joblib
+## How to Run
 
-DevOps: Docker
+### Docker Setup
+To build and run the application using Docker, use the following commands:
 
-Workflow & Logic
-1. Data Preparation
-The system processes operational data, including task priority, duration, complexity, and team workload. Categorical features are encoded for compatibility with the Machine Learning pipeline.
-
-2. Hybrid Risk Engine
-To ensure reliability, the app applies a High-Risk Override based on specific business logic:
-
-Rule: If Past Delays Exist AND Team Workload is High, the task is flagged as High Risk regardless of the ML output.
-
-If the rule is not triggered, the Logistic Regression model predicts the risk probability based on historical patterns.
-
-3. Model Outputs
-Risk Label: (High / Low)
-
-Confidence Score: The probability percentage of the prediction.
-
-Decision Source: Clarifies if the result was triggered by Rule-based logic or the ML model.
-
-Docker Setup
-1. Build the Image
-Bash
-
+```bash
+# Build Docker Image
 docker build -t operational-risk-app .
-2. Run the Container
-Bash
 
+# Run Docker Container
 docker run -p 8501:8501 operational-risk-app
-3. Access the Application
-Open your browser and go to: http://localhost:8501
-
-Usage
-Manual Entry: Use the sidebar or main form to input individual task parameters.
-
-Batch Upload: Upload a .csv file containing task data to get a breakdown of risks across an entire department or project.
